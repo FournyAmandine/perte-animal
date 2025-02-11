@@ -84,6 +84,14 @@ if (isset($_SESSION['errors']) && count($_SESSION['errors'])) {
             <?= $telephone; ?>
         </dd>
     </div>
+    <div>
+        <dt>
+            Pays
+        </dt>
+        <dd>
+            <?= $country; ?>
+        </dd>
+    </div>
 </dl>
 </body>
 </html>
