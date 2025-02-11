@@ -1,0 +1,78 @@
+body{
+    font-family: "Ag Label", serif;
+    margin : 24px
+}
+
+legend, h1{
+    font-family: Inter, serif;
+    font-weight: 700;
+    padding-top: 32px;
+
+}
+
+select{
+    background-color: #8283D1;
+    border: none;
+    padding : 8px;
+    color: white;
+    padding-right: 240px;
+    border-radius: 8px;
+    margin-left: 8px;
+}
+
+input{
+    margin-left: 8px;
+    border-radius: 8px;
+    border: #ECECEC solid 1px;
+    padding: 8px;
+    display: inline-block;
+    width: auto;
+    flex-grow: 1;
+}
+
+div:not(.sexe):not(.description){
+    display: flex;
+    align-items: center;
+}
+
+div{
+    background-color: #F9F9FB;
+    border: #ECECEC solid 1px;
+    padding: 16px;
+}
+
+div:nth-of-type(even){
+    background-color: #FDFDFD;
+}
+
+fieldset{
+    border: none;
+    padding: 0;
+}
+
+label:has(+ input[required]):before{
+    content: '*';
+    color: #EA9224;
+}
+
+label[for="code"]{
+    padding-left: 8px;
+}
+textarea{
+    display: block;
+    border-radius: 8px;
+    border: 1px solid #ECECEC;
+    min-height: 320px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+button{
+    margin-top: 32px;
+    background-color: #006400;
+    border: none;
+    padding: 8px;
+    color: white;
+    border-radius: 8px;
+    float: right;
+}
