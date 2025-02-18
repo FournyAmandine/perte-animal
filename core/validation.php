@@ -54,22 +54,36 @@ if (!function_exists('check_phone')) {
     }
 }
 
-
-if (!function_exists('check_in_collection')) {
-    function check_in_collection(string $item_field_name, $collection_name, array $collection): bool
+if (!function_exists('check_same')) {
+    function check_same(string $verification_field_name, string $original_field_name): bool
     {
-        global $messages;
-        if (!array_key_exists($_REQUEST['country'], $collection)) {
-            $_SESSION['errors'][$item_field_name] = sprintf($messages['in_collection'], $item_field_name, $collection_name);
-            return false;
+        if (array_key_exists($verification_field_name, $_REQUEST) &&
+            array_key_exists($original_field_name, $_REQUEST)) {
+            global $messages;
+            if (trim($_REQUEST[$verification_field_name]) !== trim($_REQUEST[$original_field_name])) {
+                $_SESSION['errors'][$verification_field_name] =
+                    sprintf($messages['same'], $verification_field_name, $original_field_name);
+                return false;
+            }
+            return true;
         }
-        return true;
+
+        return false;
     }
 }
 
-if (!function_exists('check_same')) {
-    function check_same(string $verification_field_name, $original_field_name): bool
+if (!function_exists('check_in_collection')) {
+    function check_in_collection(string $field_name, string $collection_name, array $collection): bool
     {
+        if (array_key_exists($field_name, $_REQUEST) &&
+            trim($_REQUEST[$field_name]) !== '' &&
+            !array_key_exists($_REQUEST[$field_name], $collection)) {
+            global $messages;
+            $_SESSION['errors'][$field_name] =
+                sprintf($messages['in_collection'], $field_name, $collection_name);
+            return false;
+        }
 
+        return true;
     }
 }
