@@ -1,6 +1,7 @@
 <?php
 session_start();
 $countries = require './config/countries.php';
+$animals = require './config/animals.php';
 ?>
 
     <!DOCTYPE html>
@@ -82,12 +83,20 @@ $countries = require './config/countries.php';
             <div>
                 <label for="animal">Type d'animal</label>
                 <select name="animal" id="animal">
-                    <option value="Ch">Chien</option>
-                    <option value="Cha">Chat</option>
-                    <option value="Pe">Perroquet</option>
-                    <option value="La">Lapin</option>
+                    <?php foreach ($animals as $letter => $animal): ?>
+                        <option value="<?= $letter ?>"
+                            <?php if (isset($_SESSION['old']['animal']) && $_SESSION['old']['animal'] === $letter): ?>
+                                selected
+                            <?php endif; ?>
+                        ><?= $animal ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
+            <?php if (isset($_SESSION['errors']['animal'])): ?>
+                <div>
+                    <p><?= $_SESSION['errors']['animal'] ?></p>
+                </div>
+            <?php endif; ?>
             <div>
                 <label for="name">Nom de l'animal</label>
                 <input type="text" id="name" name="name" value="" placeholder="Rex" required>

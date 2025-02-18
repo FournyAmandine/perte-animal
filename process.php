@@ -1,8 +1,10 @@
 <?php
 
 /** @var array $countries */
+/** @var array animals */
 session_start();
 $countries = require './config/countries.php';
+$animals = require './config/animals.php';
 require './core/validation.php';
 
 $email = '';
@@ -15,6 +17,7 @@ check_email('email');
 check_phone('telephone');
 check_same('vemail', 'email');
 check_in_collection('country', 'countries', $countries);
+check_in_collection('animal', 'animals', $animals);
 
 if (!is_null($_SESSION['errors'])) {
     $_SESSION['old'] = $_REQUEST;
