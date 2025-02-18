@@ -66,10 +66,6 @@ $countries = require './config/countries.php';
                                 selected
                             <?php endif; ?>
                         ><?= $country ?></option>
-                        <!--<option value="Ru">Royaume-Uni</option>
-                        <option value="Fr">France</option>
-                        <option value="Pb">Pays-Bas</option>
-                        <option value="Al">Allemagne</option>-->
                     <?php endforeach; ?>
                 </select>
             </div>
