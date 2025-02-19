@@ -2,19 +2,33 @@
 
 /** @var array $countries */
 session_start();
+
+require './vendor/autoload.php';
+
+use Tecgdcs\Animal\Validator;
+
 $countries = require './config/countries.php';
 require './core/validation.php';
+require './core/Validator.php';
 
 $email = '';
 $vemail = '';
 $telephone = '';
 
-check_required('email');
-check_required('vemail');
-check_email('email');
-check_phone('telephone');
-check_same('vemail', 'email');
-check_in_collection('country', 'countries', $countries);
+Validator::check([
+    'email' => 'required|email',
+    'vemail' => 'required|same:email',
+    'phone' => 'telephone',
+    'country' => 'in_collection:countries',
+]);
+
+/*Validator::required('email');
+Validator::required('vemail');
+Validator::email('email');
+Validator::same('vemail', 'email');
+Validator::phone('telephone');
+Validator::in_collection('country', 'countries', $countries);*/
+
 
 if (!is_null($_SESSION['errors'])) {
     $_SESSION['old'] = $_REQUEST;
