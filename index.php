@@ -99,12 +99,29 @@ $animals = require './config/animals.php';
             <?php endif; ?>
             <div>
                 <label for="name">Nom de l'animal</label>
-                <input type="text" id="name" name="name" value="" placeholder="Rex" required>
+                <input type="text" id="name" name="name"
+                    <?php if (isset($_SESSION['old']['name'])): ?>
+                        value="<?= $_SESSION['old']['name'] ?>"
+                    <?php endif; ?>
+                       placeholder="Rex" required>
             </div>
+            <?php if (isset($_SESSION['errors']['name'])): ?>
+                <div>
+                    <?= $_SESSION['errors']['name']; ?>
+                </div>
+            <?php endif; ?>
             <div>
                 <label for="puce">Puce (obligatoire si chien)</label>
-                <input type="text" id="puce" name="puce" placeholder="1234567890" value="">
+                <input type="text" id="puce" name="puce" placeholder="1234567890"
+                    <?php if (isset($_SESSION['old']['name'])): ?>
+                        value="<?= $_SESSION['old']['name'] ?>"
+                    <?php endif; ?>>
             </div>
+            <?php if (isset($_SESSION['errors']['puce'])): ?>
+                <div>
+                    <?= $_SESSION['errors']['puce']; ?>
+                </div>
+            <?php endif; ?>
             <div class="sexe">
                 <label for="sexe">Sexe</label>
                 <input type="radio" id="sexe" name="sexe" value="Mâle">
@@ -153,8 +170,8 @@ $animals = require './config/animals.php';
                 <input type="text" id="postal" name="postal" placeholder="4000">
             </div>
             <div>
-                <label for="country">Pays</label>
-                <select name="country" id="country">
+                <label for="lostcountry">Pays</label>
+                <select name="lostcountry" id="lostcountry">
                     <option value="Be">Belgique</option>
                     <option value="Ru">Royaume-Uni</option>
                     <option value="Fr">France</option>

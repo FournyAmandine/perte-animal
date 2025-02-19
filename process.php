@@ -13,11 +13,14 @@ $telephone = '';
 
 check_required('email');
 check_required('vemail');
+check_required('name');
 check_email('email');
 check_phone('telephone');
 check_same('vemail', 'email');
 check_in_collection('country', 'countries', $countries);
 check_in_collection('animal', 'animals', $animals);
+check_name('name');
+check_puce('puce');
 
 if (!is_null($_SESSION['errors'])) {
     $_SESSION['old'] = $_REQUEST;

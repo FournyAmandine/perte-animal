@@ -1,5 +1,7 @@
 <?php
+global $animals;
 $messages = require __DIR__ . '/../lang/fr/validation.php';
+/*$animals = require '/../config/animals.php';*/
 
 if (!function_exists('check_required')) {
     function check_required(string $field_name): bool
@@ -85,5 +87,67 @@ if (!function_exists('check_in_collection')) {
         }
 
         return true;
+    }
+}
+
+if (!function_exists('check_name')) {
+    function check_name(string $field_name): bool
+    {
+        if (!check_required($field_name)) {
+            global $messages;
+            if (!ctype_alpha($_REQUEST[$field_name])) {
+                $_SESSION['errors'][$field_name] = sprintf($messages['name'], $field_name);
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+if (!function_exists('check_puce')) {
+
+    foreach ($animals as $letter => $animal) {
+        if ($letter === 'CH') {
+            function check_puce(string $field_name): bool
+            {
+                if (!check_required($field_name)) {
+
+                    global $messages;
+                    if (strlen($_REQUEST['puce']) < 10) {
+                        $_SESSION['errors'][$field_name] = sprintf($messages['puce'], $field_name);
+                        return false;
+                    }
+
+                    if (!is_numeric(str_replace([':', '.', '-', ' '], '', $field_name))) {
+                        $_SESSION['errors'][$field_name] = sprintf($messages['puce'], $field_name);
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
+        } else {
+            if (!function_exists('check_puce')) {
+                function check_puce(string $field_name): bool
+                {
+                    if (isset($_REQUEST[$field_name]) || trim($_REQUEST[$field_name]) === '') {
+                        return false;
+                    }
+
+                    global $messages;
+                    if (strlen($_REQUEST['puce']) < 9) {
+                        $_SESSION['errors'][$field_name] = sprintf($messages['puce'], $field_name);
+                        return false;
+                    }
+
+
+                    if (!is_numeric(str_replace([':', '.', '-', ' '], '', $field_name))) {
+                        $_SESSION['errors'][$field_name] = sprintf($messages['puce'], $field_name);
+                        return false;
+                    }
+                    return true;
+                }
+            }
+        }
     }
 }
