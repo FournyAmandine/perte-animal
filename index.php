@@ -144,8 +144,8 @@ $countries = require './config/countries.php';
                 <input type="text" id="postal" name="postal" placeholder="4000">
             </div>
             <div>
-                <label for="country">Pays</label>
-                <select name="country" id="country">
+                <label for="lostcountry">Pays</label>
+                <select name="lostcountry" id="lostcountry">
                     <option value="Be">Belgique</option>
                     <option value="Ru">Royaume-Uni</option>
                     <option value="Fr">France</option>
